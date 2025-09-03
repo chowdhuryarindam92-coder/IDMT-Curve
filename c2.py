@@ -111,3 +111,4 @@ st.caption("Note: Inverse-time formula T = A·TMS / ((If/Ip)^B − 1) is valid o
 # --- Developer Credit ---
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<center><small>Developed by <b>Arindam Chowdhury</b></small></center>", unsafe_allow_html=True)
+
