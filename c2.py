@@ -38,14 +38,14 @@ col1, col2 = st.columns(2)
 with col1:
     st.subheader("Set 1")
     curve1 = st.selectbox("Curve 1", ["NI", "VI", "EI"], index=0, key="c1")
-    TMS1 = st.slider("TMS1", 0.1, 20.0, 0.1, 0.1)
+    TMS1 = st.slider("TMS1", 0.1, 5.0, 0.1, 0.1)
     Ip1  = st.slider("Pickup Ip1 (A)", 0.1, 10.0, 1.0, 0.1)
     If1  = st.slider("Fault If1 (A)", 0.1, 50.0, 2.0, 0.1)
 
 with col2:
     st.subheader("Set 2")
     curve2 = st.selectbox("Curve 2", ["NI", "VI", "EI"], index=1, key="c2")
-    TMS2 = st.slider("TMS2", 0.1, 20.0, 0.2, 0.1)
+    TMS2 = st.slider("TMS2", 0.1, 5.0, 0.2, 0.1)
     Ip2  = st.slider("Pickup Ip2 (A)", 0.1, 10.0, 1.5, 0.1)
     If2  = st.slider("Fault If2 (A)", 0.1, 50.0, 3.0, 0.1)
 
@@ -111,5 +111,6 @@ st.caption("Note: Inverse-time formula T = A·TMS / ((If/Ip)^B − 1) is valid o
 # --- Developer Credit ---
 st.markdown("<hr>", unsafe_allow_html=True)
 st.markdown("<center><small>Developed by <b>Arindam Chowdhury</b></small></center>", unsafe_allow_html=True)
+
 
 
