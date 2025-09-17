@@ -103,7 +103,7 @@ ax.plot(fault_currents, y2, label=f"Relay 2 ({curve2})", linestyle="--", color="
 ax.plot(fault_currents, y3, label="Relay 3 (DT)",         linestyle="-.", color="black")
 
 # Common current marker (If) also ETAP green but a bit thicker for visibility
-ax.axvline(x=IF, linestyle=":", linewidth=1.2, color="#00A651", label=f"If = {IF:.4g} A")
+ax.axvline(x=IF, linestyle=":", linewidth=1.5, color="#21427b", label=f"If = {IF:.4g} A")
 
 ax.set_title("Time-Current Characteristic Curves – Multi-Relay Comparison")
 ax.set_xlabel("Current (A)")
@@ -216,4 +216,5 @@ st.markdown(
     "<center><small>Developed by <b>Arindam Chowdhury</b>, Electrical Engineer</small></center>",
     unsafe_allow_html=True,
 )
+
 
