@@ -42,6 +42,13 @@ with st.sidebar:
     x_min, x_max = 0.1, 1000.0
     fault_currents = np.logspace(np.log10(x_min), np.log10(x_max), 500)
 
+    # NEW: Relay visibility selector
+    visible_relays = st.multiselect(                       # NEW
+        "Show these relays on chart",                      # NEW
+        options=["Relay 1", "Relay 2", "Relay 3"],         # NEW
+        default=["Relay 1", "Relay 2", "Relay 3"]          # NEW
+    )    
+
 col1, col2, col3 = st.columns(3)
 
 # --- Relay 1 (IDMT) ---
@@ -97,10 +104,15 @@ tt3 = Td3 if IF > Ip3 else np.nan
 # --- Plot (grid ETAP green, relays colored individually) ---
 fig, ax = plt.subplots(figsize=(10, 6))
 
-# Different colors for each relay
-ax.plot(fault_currents, y1, label=f"Relay 1 ({curve1})", linestyle="-",  color="blue")
-ax.plot(fault_currents, y2, label=f"Relay 2 ({curve2})", linestyle="--", color="red")
-ax.plot(fault_currents, y3, label="Relay 3 (DT)",         linestyle="-.", color="black")
+# Plot only selected relays
+if "Relay 1" in visible_relays:
+    ax.plot(fault_currents, y1, label=f"Relay 1 ({curve1})", linestyle="-",  color="blue")
+
+if "Relay 2" in visible_relays:
+    ax.plot(fault_currents, y2, label=f"Relay 2 ({curve2})", linestyle="--", color="red")
+
+if "Relay 3" in visible_relays:
+    ax.plot(fault_currents, y3, label="Relay 3 (DT)", linestyle="-.", color="black")
 
 # Common current marker (If) also ETAP green but a bit thicker for visibility
 ax.axvline(x=IF, linestyle=":", linewidth=1.5, color="#21427b", label=f"If = {IF:.4g} A")
@@ -150,6 +162,9 @@ def make_row(relay, curve, Ip, tms_value, td_value, tt, If):
 make_row("Relay 1", curve1, Ip1, TMS1, None, tt1, IF)
 make_row("Relay 2", curve2, Ip2, TMS2, None, tt2, IF)
 make_row("Relay 3", "DT",   Ip3, None, Td3, tt3, IF)
+
+# Filter rows by selected relays
+rows = [r for r in rows if r["Relay"] in visible_relays]
 
 # Sort by time_value (ascending), operating first
 rows_sorted = sorted(rows, key=lambda r: (r["time_value"] == np.inf, r["time_value"]))
@@ -216,6 +231,7 @@ st.markdown(
     "<center><small>Developed by <b>Arindam Chowdhury</b>, Electrical Engineer</small></center>",
     unsafe_allow_html=True,
 )
+
 
 
 
